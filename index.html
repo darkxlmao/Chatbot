@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="icons/favicon.ico" type="image/ico">
+<link rel="manifest" href="manifest.json" />
+<script src="js/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "js/pdf.worker.min.js";
+</script>
+
+</head>
+<body>
+<!-- MAIN VAULT CONTAINER -->
+<div class="vault-container">
+  <h1>Chatbot</h1>
+  <div class="vault-toolbar">
+    <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
+    <button id="aboutBtn" class="toolbar-btn">About</button>
+    <button id="helpBtn">?</button>
+  </div>
+  <div class="chatbox" id="chatbox">
+    <div class="typing-indicator" id="typingIndicator">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="input-area">
+    <button id="addDocBtn" title="Add Document">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <input type="text" id="userInput" placeholder="Type your query...">
+    <button id="sendBtn" title="Send">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
+      </svg>
+    </button>
+  </div>
+  <input type="file" id="importFile" accept="application/json" style="display:none;">
+</div>
+
+<!-- ADD DOCUMENT POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2 id="popupTitle">Add Document</h2>
+    <input type="text" id="docName" placeholder="Document Name">
+    <input type="text" id="docValue" placeholder="Document Number / Value">
+    <label for="docFile">Attach File (optional):</label>
+    <input type="file" id="docFile" accept=".pdf,.png,.jpg,.jpeg,.gif,.txt,.doc,.docx,.zip" />
+    <textarea id="docInfo" placeholder="Additional Information (optional)"></textarea>
+    <div class="popup-actions">
+      <button id="saveDocBtn" type="button">Save</button>
+      <button id="cancelBtn" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT DOCUMENT POPUP -->
+<div class="popup" id="editPopup">
+  <div class="popup-content" style="max-height: 420px; overflow-y: auto;">
+    <h2>Edit Documents</h2>
+    <div id="editDocsList" class="edit-doc-list"></div>
+  </div>
+  <div class="edit-actions">
+    <button id="exportBtn">Export</button>
+    <button id="importBtn">Import</button>
+    <button id="clearBtn">Delete all</button>
+    <button id="closeEditPopup">Close</button>
+  </div>
+</div>
+
+<!-- ABOUT POPUP -->
+<div id="aboutPopup" class="about-popup">
+  <div class="about-box">
+    <button id="closeAbout" class="about-close-btn">✕</button>
+    <h2 class="about-title">ChatBot</h2>
+
+    <img src="icons/192.png" class="about-logo">
+
+    <p class="about-desc">A secure offline chatbot vault that stores your personal documents, notes, and files locally, no internet or servers required. <b>made to keep your data truly , modified by hellboi through which u can save your documents and access through telegram fully secure<i>yours</i>.</b></p>
+
+    <div class="about-links-row">
+      <a href="https://github.com/WorkofAditya/ChatBot" target="_blank">GitHub</a>
+      <a href="https://codepen.io/WorkofAditya/pen/azNBRWr" target="_blank">CodePen</a>
+      <a href="#" id="openChangelogBtn">Changelog</a>
+    </div>
+
+    <p class="about-dev">Developed by <b>Adityasinh Sodha</b></p>
+        <p class="about-version">Version: <b>v2.0.1</b><br><tr>
+        App version: <b id="appVersion">Loading...</b></tr>
+        </p>
+  </div>
+</div>
+
+<div id="changelogPopup" class="about-popup">
+  <div class="about-box changelog-box-inner">
+    <h2 class="about-title">Changelog</h2>
+    <div id="changelogBody"></div>
+    <div class="popup-actions">
+      <button id="refreshChangelogBtn">Refresh</button>
+      <button id="closeChangelogBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="imgModal">
+  <img id="imgModalContent">
+</div>
+
+<div id="pdfModal">
+  <iframe id="pdfModalViewer"></iframe>
+</div>
+
+<div id="importLoader" style="display:none;">
+  <div id="importBar"></div>
+  <span id="importText">Importing 0%</span>
+</div>
+
+<div class="about-popup" id="helpPopup">
+  <div class="about-box">
+    <button class="about-close-btn" id="closeHelp">×</button>
+    <h2 class="about-title">User Guide</h2>
+    <div id="helpBody" class="changelog-box-inner"></div>
+  </div>
+</div>
+
+<!-- UPDATE POPUP -->
+<div id="updatePopup" class="popup">
+  <div class="popup-content">
+    <h2>Update Available</h2>
+    <p>A new version of ChatBot is ready. Install the update to get new features and improvements.</p>
+    <div class="popup-actions">
+      <button id="refreshAppBtn">Update Now</button>
+      <button id="dismissUpdateBtn">Later</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
